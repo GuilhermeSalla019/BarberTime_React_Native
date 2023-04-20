@@ -20,7 +20,7 @@ const servico = new Schema({
             required: true
         },
         duracao: {
-            type: Number, // Duração em minutos do serviço
+            type: Date, // Duração em minutos do serviço
             required: true
         },
         recorrencia: {

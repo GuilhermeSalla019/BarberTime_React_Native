@@ -35,7 +35,7 @@ module.exports = {
             s3bucket.upload(params, function(err, data) {
                 if (err) {
                     console.log(err);
-                    return resolve({ error: true, message: err });
+                    return resolve({ error: true, message: err.message });
                 }
                 console.log(data);
                 return resolve({ error: false, message: data });

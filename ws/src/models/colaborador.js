@@ -16,7 +16,7 @@ const colaborador = new Schema({
         }, 
         senha: {
             type: String,
-            required: true,   
+            default: null,  
         },
         foto: {
             type: String,

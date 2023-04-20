@@ -17,7 +17,7 @@ const salaoColaborador = new Schema({
     status: {
         type: String,
         required: true,
-        enum: ['A','I'],
+        enum: ['A','I', 'E'],
         default: 'A',   
     },
     dataCadastro: {

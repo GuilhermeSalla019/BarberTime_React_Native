@@ -27,8 +27,9 @@ const salao = new Schema({
     },
     geo:{
         tipo: String,
-        coordinates: Array,
+        coordinates: [Number],
     },
+    recipientId: String,
     dataCadastro: {
         type: Date,
         default: Date.now,

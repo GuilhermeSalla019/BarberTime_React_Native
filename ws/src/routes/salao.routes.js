@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Salao = require('../models/salao');
 const Servico = require('../models/servico');
+const turf = require('@turf/turf');
 
 //requisição e resposta
 router.post('/', async (req, res) => { //Metodo Post para Criação
@@ -13,6 +14,7 @@ router.post('/', async (req, res) => { //Metodo Post para Criação
     }
 });
 
+    //Buscar serviços do salão e retornar
 router.get('/servicos/:salaoId', async (req, res) =>{
     try{
         const { salaoId } = req.params;
@@ -30,5 +32,23 @@ router.get('/servicos/:salaoId', async (req, res) =>{
     }
 
 })
+
+router.get('/:id', async (req, res) => {
+    try{
+        const salao = await Salao.findById(req.params.id).select(
+            'capa nome endereco.cidade geo.coordinates telefone'
+            );
+
+            // Distancia
+            const distance = turf.distance(
+                turf.point(salao.geo.coordinates),
+                turf.point([-22.9387441, -47.1343738])//ALTERAR: PEGA LOCALIZAÇÂO DO APARELHO CELULAR
+            );
+
+            res.json({ error: false, salao, distance });
+    } catch (err) {
+        res.json({ error: true, message: err.message});
+    }
+});
 
 module.exports = router;
